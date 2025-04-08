@@ -1,0 +1,45 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block heading %}
+Регистрация
+{% endblock %}
+{% block content %}
+<form class="form col-5" role="form">
+<div class="error-message">Пользователь с такой почтой уже существует!</div>
+<div class="form-group">
+<label class="control-label mb-2">Логин</label>
+<input type="text" class="form-control mb-2" placeholder="Введите логин">
+</div>
+<div class="form-group">
+<label class="control-label mb-2">Электроная почта</label>
+<input type="text" class="form-control mb-2" placeholder="Введите электронную почту">
+</div>
+<div class="form-group">
+<label class="control-label mb-2">Псевдоним</label>
+<input type="text" class="form-control mb-2" placeholder="Введите псевдоним">
+</div>
+<div class="form-group">
+<label class="control-label mb-2">Пароль</label>
+<input type="password" class="form-control mb-3" placeholder="Введите пароль">
+</div>
+<div class="form-group">
+<label class="control-label mb-2">Повторите пароль</label>
+<input type="password" class="form-control mb-3" placeholder="Введите пароль">
+</div>
+<div class="form-group mb-4">
+  <label for="formFile" class="form-label mb-2">Загрузите аватар</label>
+  <input class="form-control" type="file" id="formFile">
+</div>
+<div class="form-group">
+<div class="checkbox">
+</div>
+</div>
+<div class="form-group">
+<a href={% url 'index' %} class="ask-answer-btn">Создать аккаунт</a>
+</div>
+</form>
+{% endblock %}

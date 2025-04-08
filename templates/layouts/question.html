@@ -1,0 +1,45 @@
+{% load static %}
+
+<div class="ui-outer">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-2 col-sm-2 col-xs-2 col-pad">
+							<div class="ui-block">
+                            <div>
+                            <img class="ui-logo" src={% static 'img/' %}{{ question.profile.avatar }} alt="Аватар">
+                            </div>
+							<div class="article-content-block-user-name">{{ question.profile.username }}</div>
+							</div>
+						</div>
+						<div class="col-md-7 col-sm-7 col-xs-7 col-pad">
+							<div class="ui-content">
+								<h4>{{ question.title }}</h4>
+								<p>{{ question.text }}</p><br>
+                               <div class="ui-content-block">
+                               <div class="qty">
+                               <span class="plus">&#128402;</span>
+                        <input type="number" class="count" name="qty" value={{ question.get_likes }}>
+                        <span class="minus">&#128403;</span>
+                                </div>
+                                <div>
+                                <span class="ui-content-block-comments"><b>Комментарии: {{ question.count_of_comments }}</b></span>
+                                </div>
+                                </div>
+							</div>
+						</div>
+						<div class="col-md-3 col-sm-3 col-xs-3 col-pad">
+				                <div class="article-content-block-tags"><h5>Теги вопроса</h5>
+				                <hr>
+								<ul>
+									{% for tag in question.tag.all %}
+								    <li><a href={% url 'tag' tag.slug %}>{{ tag.title }}</a></li>
+									{% endfor %}
+								</ul>
+								</div>
+							<div class="ui-btn">
+								<a href={% url 'question' question.id %} class="btn btn-green ui-green">Перейти</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
