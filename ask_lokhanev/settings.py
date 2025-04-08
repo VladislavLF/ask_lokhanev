@@ -81,9 +81,9 @@ WSGI_APPLICATION = 'ask_lokhanev.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ask_lokhanev_db',
+        'NAME': 'mydb',
         'USER': 'root',
-        'PASSWORD': 'MEJc?DiLcuhIIsJ'
+        'PASSWORD': 'admin'
     }
 }
 
