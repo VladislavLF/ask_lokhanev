@@ -4,7 +4,7 @@
  Заполнение базы данных MySQL осуществляется по management command: python manage.py fill_db [ratio]. Предварительно необходимо настроить DATABASES в settings.py под свою базу данных.  <br />
 
 EER Diagram
- ![image](https://github.com/user-attachments/assets/83502218-8bc8-4405-a1c9-b99c762c1bc6)
+![image](https://github.com/user-attachments/assets/94b9253e-ef39-4dbe-ae19-1516124d0516)
 
 Главная страница
 ![image](https://github.com/user-attachments/assets/b92f760a-9f93-44d8-9098-c5ab049ced18)
