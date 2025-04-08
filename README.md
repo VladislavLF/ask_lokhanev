@@ -1,7 +1,7 @@
- Проект «Вопросы и Ответы» (Технопарк МГТУ). <br />
+ Проект «Вопросы и Ответы» (Технопарк МГТУ. Программа по веб-разработке (1 семестр). Дисциплина: Web-технологии). <br />
  Автор: Лоханев В.Ф. (WEB-12). <br />
- Верстка (ДЗ №1) находится в директории Layout. <br />
- Заполнение базы данных MySQL осуществляется по management command: python manage.py fill_db [ratio]. <br />
+ Верстка сайта находится в директории Layout. <br />
+ Заполнение базы данных MySQL осуществляется по management command: python manage.py fill_db [ratio]. Предварительно необходимо настроить DATABASES в settings.py под свою базу данных.  <br />
 
 Главная страница
 ![image](https://github.com/user-attachments/assets/b92f760a-9f93-44d8-9098-c5ab049ced18)
