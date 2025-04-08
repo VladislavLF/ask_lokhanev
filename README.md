@@ -1,7 +1,7 @@
- Проект «Вопросы и Ответы» (Технопарк МГТУ). 
- Автор: Лоханев В.Ф. (WEB-12).
- Верстка (ДЗ №1) находится в директории Layout. 
- Заполнение базы данных MySQL осуществляется по management command: python manage.py fill_db [ratio]
+ Проект «Вопросы и Ответы» (Технопарк МГТУ). <br />
+ Автор: Лоханев В.Ф. (WEB-12). <br />
+ Верстка (ДЗ №1) находится в директории Layout. <br />
+ Заполнение базы данных MySQL осуществляется по management command: python manage.py fill_db [ratio]. <br />
 
 Главная страница
 ![image](https://github.com/user-attachments/assets/b92f760a-9f93-44d8-9098-c5ab049ced18)
