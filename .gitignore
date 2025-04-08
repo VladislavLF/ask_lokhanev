@@ -1,0 +1,12 @@
+.gitignore
+*.sqlite3
+.idea/
+.DS_Store
+main/static/.DS_Store
+main/static/bootstrap5.3.2
+*.pxd
+main/uploads/users/
+*.log
+main/static/admin/
+main/static/django_extensions/
+var/
