@@ -1,0 +1,5 @@
+.gitignore
+*.sqlite3
+.idea/
+*.pxd
+*.log
