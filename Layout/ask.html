@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./static/styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <title>Задать вопрос</title>
+</head>
+<body>
+<header class="p-3 bg-dark text-white">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href="./index.html" class="header-logo d-flex align-items-center mb-2 mb-lg-0 text-decoration-none">
+          AskLokhanev
+        </a>
+
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="./index.html" class="nav-link px-2">Главная</a></li>
+          <li><a href="./ask.html" class="nav-link px-2">Задать вопрос</a></li>
+          <li><a href="./tag.html" class="nav-link px-2">Тренды</a></li>
+        </ul>
+
+        <form class="header-form col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+          <input type="search" class="form-control form-control-dark" placeholder="Поиск" aria-label="Search">
+        </form>
+
+        <div class="header-auth text-end">
+         <div class="header-auth-log-out" style="display: none">
+          <a class="btn btn-outline-light me-2" href="./login.html">Войти</a>
+          <a class="btn" href="./signup.html">Регистрация</a>
+         </div>
+         <div class="header-auth-log-in">
+             <div class="flex-shrink-0 dropdown">
+          <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+          </a>
+          <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+            <li><a class="dropdown-item" href="./settings.html">Профиль</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="./index.html">Выйти</a></li>
+          </ul>
+        </div>
+         </div>
+        </div>
+      </div>
+    </div>
+</header>
+<article>
+<div class="article-content">
+	<div class="article-content-heading">
+    <h1>Задать вопрос</h1>
+    </div>
+    <div class="container-fluid">
+	<div class="row">
+		        <div class="card-body">
+		            <div class="row">
+		                <div class="col-md-8">
+        		            <form>
+                              <div class="form-group row ask-answer-heading">
+                                <label for="text" class="col-12 col-form-label">Заголовок вопроса</label> 
+                                <div class="col-12">
+                                  <input id="text" name="text" placeholder="" class="form-control here" required="required" type="text">
+                                </div>
+                              </div>
+                              <div class="form-group row ask-answer-text">
+                                <label for="textarea" class="col-12 col-form-label">Текст вопроса</label> 
+                                <div class="col-12">
+                                  <textarea id="textarea" name="textarea" cols="40" rows="15" class="form-control"></textarea>
+                                </div>
+                              </div> 
+                            </form>
+        		        </div>
+        		        <div class="col-md-4 ">
+                            <div class="card mb-3 ask-answer-tags" style="max-width: 18rem;">
+                                  <div class="card-header">Теги</div>
+                                  <div class="card-body">
+                                    <form>
+                                      <div class="form-group row">
+                                        <div class="col-9">
+                                          <input id="tags" name="tags" placeholder="" required="required" class="form-control here" type="text">
+                                        </div>
+                                        <div class=" col-2">
+                                          <button name="submit" type="submit" class="btn">+</button>
+                                        </div>
+                                      </div> 
+                                    </form>
+                                    
+
+                                  </div>
+                                </div> 
+        		        </div>
+        		        <div class="col-md-7">
+		                    <button type="button" class="ask-answer-btn">Отправить</button>
+		                </div>
+        		    </div>
+		</div>
+	</div>
+</div>
+</div>
+<div class="article-side">
+<div class="article-side-block">
+<div class="container-fluid">
+    <!-- Heading -->
+    <h4><i class="fa fa-cogs lblue"></i>&nbsp; Популярные теги</h4>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <!-- Item -->
+            <div class="article-side-block-item">
+                <!-- Heading -->	
+                <a href="./tag.html"><span>Тег</span></a>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <!-- Item -->
+            <div class="article-side-block-item">
+                <!-- Heading -->	
+                <a href="./tag.html"><span>Тег</span></a>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <!-- Item -->
+            <div class="article-side-block-item">
+                <!-- Heading -->	
+                <a href="./tag.html"><span>Тег</span></a>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <!-- Item -->
+            <div class="article-side-block-item">
+                <!-- Heading -->	
+                <a href="./tag.html"><span>Тег</span></a>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <!-- Item -->
+            <div class="article-side-block-item">
+                <!-- Heading -->	
+                <a href="./tag.html"><span>Тег</span></a>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <!-- Item -->
+            <div class="article-side-block-item">
+                <!-- Heading -->	
+                <a href="./tag.html"><span>Тег</span></a>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <!-- Item -->
+            <div class="article-side-block-item">
+                <!-- Heading -->	
+                <a href="./tag.html"><span>Тег</span></a>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <!-- Item -->
+            <div class="article-side-block-item">
+                <!-- Heading -->	
+                <a href="./tag.html"><span>Тег</span></a>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <!-- Item -->
+            <div class="article-side-block-item">
+                <!-- Heading -->	
+                <a href="./tag.html"><span>Тег</span></a>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <!-- Item -->
+            <div class="article-side-block-item">
+                <!-- Heading -->	
+                <a href="./tag.html"><span>Тег</span></a>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <!-- Item -->
+            <div class="article-side-block-item">
+                <!-- Heading -->	
+                <a href="./tag.html"><span>Тег</span></a>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <!-- Item -->
+            <div class="article-side-block-item">
+                <!-- Heading -->	
+                <a href="./tag.html"><span>Тег</span></a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="article-side-block">
+<div class="container-fluid">
+    <!-- Heading -->
+    <h4><i class="fa fa-cogs lblue"></i>&nbsp; Топ пользователей</h4>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <!-- Item -->
+            <div class="article-side-block-item">
+                <!-- Heading -->	
+                <span>Юзер</span>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <!-- Item -->
+            <div class="article-side-block-item">
+                <!-- Heading -->	
+               <span>Юзер</span>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <!-- Item -->
+            <div class="article-side-block-item">
+                <!-- Heading -->	
+                <span>Юзер</span>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <!-- Item -->
+            <div class="article-side-block-item">
+                <!-- Heading -->	
+                <span>Юзер</span>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <!-- Item -->
+            <div class="article-side-block-item">
+                <!-- Heading -->	
+                <span>Юзер</span>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <!-- Item -->
+            <div class="article-side-block-item">
+                <!-- Heading -->	
+                <span>Юзер</span>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <!-- Item -->
+            <div class="article-side-block-item">
+                <!-- Heading -->	
+                <span>Юзер</span>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <!-- Item -->
+            <div class="article-side-block-item">
+                <!-- Heading -->	
+                <span>Юзер</span>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <!-- Item -->
+            <div class="article-side-block-item">
+                <!-- Heading -->	
+                <span>Юзер</span>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <!-- Item -->
+            <div class="article-side-block-item">
+                <!-- Heading -->	
+                <span>Юзер</span>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <!-- Item -->
+            <div class="article-side-block-item">
+                <!-- Heading -->	
+                <span>Юзер</span>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <!-- Item -->
+            <div class="article-side-block-item">
+                <!-- Heading -->	
+                <span>Юзер</span>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</article>
+</body>
+</html>
