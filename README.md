@@ -1,10 +1,10 @@
- Проект «Вопросы и Ответы» (Технопарк МГТУ. Программа по веб-разработке (1 семестр). Дисциплина: Web-технологии). <br />
+![image](https://github.com/user-attachments/assets/e8a29a11-fcf6-4c32-95f5-ded05aaf13d6) Проект «Вопросы и Ответы» (Технопарк МГТУ. Программа по веб-разработке (1 семестр). Дисциплина: Web-технологии). <br />
  Автор: Лоханев В.Ф. (WEB-12). <br />
  Верстка сайта находится в директории Layout. <br />
  Заполнение базы данных MySQL осуществляется по management command: python manage.py fill_db [ratio]. Предварительно необходимо настроить DATABASES в settings.py под свою базу данных.  <br />
 
 EER Diagram
-![image](https://github.com/user-attachments/assets/94b9253e-ef39-4dbe-ae19-1516124d0516)
+![image](https://github.com/user-attachments/assets/1115419b-4e60-45af-8b2b-da7003aff767)
 
 Главная страница
 ![image](https://github.com/user-attachments/assets/b92f760a-9f93-44d8-9098-c5ab049ced18)
