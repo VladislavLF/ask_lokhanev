@@ -7,19 +7,19 @@ EER Diagram
 ![image](https://github.com/user-attachments/assets/0a79bf83-4cb7-4241-ac31-d0bbb29bd874)
 
 Главная страница
-![image](https://github.com/user-attachments/assets/b92f760a-9f93-44d8-9098-c5ab049ced18)
+![image](https://github.com/user-attachments/assets/6a8d3bb6-c619-4968-8c0c-a52284cc2197)
 
 Страница вопроса
-![image](https://github.com/user-attachments/assets/f0172710-2fe2-4c8b-9d45-f7b74347d090)
+![image](https://github.com/user-attachments/assets/ef17787b-7497-49ed-bbd5-7adb69933539)
 
 Задать вопрос
-![image](https://github.com/user-attachments/assets/b3b35dcb-ab06-41a2-9bfd-f0773324ed27)
+![image](https://github.com/user-attachments/assets/31c42db2-512f-44b1-8282-df32ff8c075e)
 
 Войти
-![image](https://github.com/user-attachments/assets/2279c799-bd0c-4d88-be80-9cdeb3e78cdd)
+![image](https://github.com/user-attachments/assets/8c05183b-87a7-493a-8dd8-f705c7f91abc)
 
 Регистрация
-![image](https://github.com/user-attachments/assets/5305ddb8-ec96-4f54-8ddc-811ebdd19116)
+![image](https://github.com/user-attachments/assets/43a36498-46b8-4a3e-bbe7-f5afe6542c77)
 
 Профиль
-![image](https://github.com/user-attachments/assets/cc95e191-13ea-411d-bfce-04f907115872)
+![image](https://github.com/user-attachments/assets/79de809b-026d-4931-9aaa-af9de9dc4a11)
