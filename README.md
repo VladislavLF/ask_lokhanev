@@ -10,7 +10,7 @@ EER Diagram
 ![image](https://github.com/user-attachments/assets/6a8d3bb6-c619-4968-8c0c-a52284cc2197)
 
 Страница вопроса
-![image](https://github.com/user-attachments/assets/ef17787b-7497-49ed-bbd5-7adb69933539)
+![image](https://github.com/user-attachments/assets/95f65d1b-400d-4f07-afd3-a8535b7ead87)
 
 Задать вопрос
 ![image](https://github.com/user-attachments/assets/31c42db2-512f-44b1-8282-df32ff8c075e)
