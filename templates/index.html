@@ -1,0 +1,14 @@
+{% extends "layouts/base.html" %}
+{% block title %}
+{{ title }}
+{% endblock %}
+{% block heading %}
+Новые вопросы
+<a href={% url 'hot' %}>Популярное</a>
+{% endblock %}
+{% block content %}
+{% for question in page_obj %}
+    {% include "layouts/question.html" %}
+{% endfor %}
+{% include "layouts/pagination.html" %}
+{% endblock %}
