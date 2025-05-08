@@ -28,7 +28,8 @@ EER Diagram
 Запрос: 
 `ab -n 5000 http://127.0.0.1/static/css/styles.css`
 Ответ: 
-«`Server Software:        nginx/1.18.0
+```
+Server Software:        nginx/1.18.0
 Server Hostname:        127.0.0.1
 Server Port:            80
 
@@ -62,12 +63,14 @@ Percentage of the requests served within a certain time (ms)
   95%      0
   98%      1
   99%      1
- 100%      3 (longest request)«`
+ 100%      3 (longest request)
+```
 
 Отдача статического документа напрямую через gunicorn
 Запрос: 
-ab -n 5000 http://127.0.0.1:8000/static/css/styles.css
+`ab -n 5000 http://127.0.0.1:8000/static/css/styles.css`
 Ответ:
+```
 Server Software:        gunicorn
 Server Hostname:        127.0.0.1
 Server Port:            8000
@@ -103,11 +106,13 @@ Percentage of the requests served within a certain time (ms)
   98%     20
   99%    213
  100%    609 (longest request)
+```
 
 Отдача динамического документа напрямую через gunicorn
 Запрос: 
-ab -n 500 http://127.0.0.1:8000/
+`ab -n 500 http://127.0.0.1:8000/`
 Ответ:
+```
 Server Software:        gunicorn
 Server Hostname:        127.0.0.1
 Server Port:            8000
@@ -143,11 +148,13 @@ Percentage of the requests served within a certain time (ms)
   98%   1125
   99%   1169
  100%   1291 (longest request)
+```
 
 Отдача динамического документа через проксирование запроса с nginx на gunicorn
 Запрос: 
-ab -n 500 http://127.0.0.1/
+`ab -n 500 http://127.0.0.1/`
 Ответ:
+```
 Server Software:        nginx/1.18.0
 Server Hostname:        127.0.0.1
 Server Port:            80
@@ -183,11 +190,13 @@ Percentage of the requests served within a certain time (ms)
   98%   1890
   99%   1925
  100%   2124 (longest request)
+```
 
 Отдача динамического документа через проксирование запроса с nginx на gunicorn, при кэшировние ответа на nginx (proxy cache)
 Запрос: 
-ab -n 500 http://127.0.0.1/
+`ab -n 500 http://127.0.0.1/`
 Ответ:
+```
 Server Software:        nginx/1.18.0
 Server Hostname:        127.0.0.1
 Server Port:            80
@@ -223,3 +232,4 @@ Percentage of the requests served within a certain time (ms)
   98%      2
   99%      3
  100%   1077 (longest request)
+```
