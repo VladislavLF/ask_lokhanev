@@ -68,7 +68,7 @@ Percentage of the requests served within a certain time (ms)
 
 Отдача статического документа напрямую через gunicorn <br />
 Запрос: <br />
-`ab -n 5000 http://127.0.0.1:8000/static/css/styles.css`
+`ab -n 5000 http://127.0.0.1:8000/static/css/styles.css` <br /> 
 Ответ: <br />
 ```
 Server Software:        gunicorn
@@ -110,7 +110,7 @@ Percentage of the requests served within a certain time (ms)
 
 Отдача динамического документа напрямую через gunicorn <br />
 Запрос: <br />
-`ab -n 500 http://127.0.0.1:8000/`
+`ab -n 500 http://127.0.0.1:8000/` <br />
 Ответ: <br />
 ```
 Server Software:        gunicorn
@@ -152,7 +152,7 @@ Percentage of the requests served within a certain time (ms)
 
 Отдача динамического документа через проксирование запроса с nginx на gunicorn <br />
 Запрос: <br />
-`ab -n 500 http://127.0.0.1/`
+`ab -n 500 http://127.0.0.1/` <br />
 Ответ: <br />
 ```
 Server Software:        nginx/1.18.0
@@ -194,7 +194,7 @@ Percentage of the requests served within a certain time (ms)
 
 Отдача динамического документа через проксирование запроса с nginx на gunicorn, при кэшировние ответа на nginx (proxy cache) <br />
 Запрос: <br />
-`ab -n 500 http://127.0.0.1/`
+`ab -n 500 http://127.0.0.1/` <br />
 Ответ: <br />
 ```
 Server Software:        nginx/1.18.0
