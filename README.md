@@ -233,3 +233,9 @@ Percentage of the requests served within a certain time (ms)
   99%      3
  100%   1077 (longest request)
 ```
+
+Насколько быстрее отдается статика по сравнению с WSGI? <br />
+Ответ: <br />
+
+Во сколько раз ускоряет работу proxy_cache? <br />
+Ответ: <br />
