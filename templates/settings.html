@@ -1,0 +1,26 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block heading %}
+Настройки профиля
+{% endblock %}
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-error">{{ form.non_field_errors }}</div>
+{% for f in form %}
+<div class="form-group col-8">
+   <label class="control-label mb-2" for="{{ f.id_for_label }}">{{ f.label }}</label>
+   {{ f }}
+   <div class="error-message">{{ f.errors }}</div>
+</div>
+{% endfor %}
+
+<div class="form-group">
+    <button type="submit" class="ask-answer-btn">Сохранить</button>
+</div>
+</form>
+{% endblock %}
