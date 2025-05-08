@@ -236,10 +236,10 @@ Percentage of the requests served within a certain time (ms)
 
 Насколько быстрее отдается статика по сравнению с WSGI? <br />
 Ответ: <br />
-> Для ответа на вопрос, необходимо обратиться к параметру TPR (Time per request). <br />
+> Обратимся к параметру TPR (Time per request). <br />
 > Nginx TPR: 0.222 [ms] (mean) <br />
 > Gunicorn TPR: 6.217 [ms] (mean) <br />
-> Разница на 5.995 [ms] (mean), nginx отдает статику быстрее в 28 раз в среднем. v
+> Разница на 5.995 [ms] (mean), nginx отдает статику быстрее в 28 раз в среднем.
 
 Во сколько раз ускоряет работу proxy_cache? <br />
 Ответ: <br />
