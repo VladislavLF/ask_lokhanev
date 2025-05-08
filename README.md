@@ -3,28 +3,28 @@
  Верстка сайта находится в директории Layout. <br />
  Заполнение базы данных MySQL осуществляется по management command: python manage.py fill_db [ratio]. Предварительно необходимо настроить DATABASES в settings.py под свою базу данных.  <br />
 
-EER Diagram
+**EER Diagram**
 ![image](https://github.com/user-attachments/assets/0a79bf83-4cb7-4241-ac31-d0bbb29bd874)
 
-Главная страница
+**Главная страница**
 ![image](https://github.com/user-attachments/assets/6a8d3bb6-c619-4968-8c0c-a52284cc2197)
 
-Страница вопроса
+**Страница вопроса**
 ![image](https://github.com/user-attachments/assets/95f65d1b-400d-4f07-afd3-a8535b7ead87)
 
-Задать вопрос
+**Задать вопрос**
 ![image](https://github.com/user-attachments/assets/31c42db2-512f-44b1-8282-df32ff8c075e)
 
-Войти
+**Войти**
 ![image](https://github.com/user-attachments/assets/8c05183b-87a7-493a-8dd8-f705c7f91abc)
 
-Регистрация
+**Регистрация**
 ![image](https://github.com/user-attachments/assets/43a36498-46b8-4a3e-bbe7-f5afe6542c77)
 
-Профиль
+**Профиль**
 ![image](https://github.com/user-attachments/assets/79de809b-026d-4931-9aaa-af9de9dc4a11)
 
-Отдача статического документа напрямую через nginx <br /> 
+**Отдача статического документа напрямую через nginx** <br /> 
 Запрос: <br />
 `ab -n 5000 http://127.0.0.1/static/css/styles.css` <br />
 Ответ: <br />
@@ -66,7 +66,7 @@ Percentage of the requests served within a certain time (ms)
  100%      3 (longest request)
 ```
 
-Отдача статического документа напрямую через gunicorn <br />
+**Отдача статического документа напрямую через gunicorn** <br />
 Запрос: <br />
 `ab -n 5000 http://127.0.0.1:8000/static/css/styles.css` <br /> 
 Ответ: <br />
@@ -108,7 +108,7 @@ Percentage of the requests served within a certain time (ms)
  100%    609 (longest request)
 ```
 
-Отдача динамического документа напрямую через gunicorn <br />
+**Отдача динамического документа напрямую через gunicorn** <br />
 Запрос: <br />
 `ab -n 500 http://127.0.0.1:8000/` <br />
 Ответ: <br />
@@ -150,7 +150,7 @@ Percentage of the requests served within a certain time (ms)
  100%   1291 (longest request)
 ```
 
-Отдача динамического документа через проксирование запроса с nginx на gunicorn <br />
+**Отдача динамического документа через проксирование запроса с nginx на gunicorn** <br />
 Запрос: <br />
 `ab -n 500 http://127.0.0.1/` <br />
 Ответ: <br />
@@ -192,7 +192,7 @@ Percentage of the requests served within a certain time (ms)
  100%   2124 (longest request)
 ```
 
-Отдача динамического документа через проксирование запроса с nginx на gunicorn, при кэшировние ответа на nginx (proxy cache) <br />
+**Отдача динамического документа через проксирование запроса с nginx на gunicorn, при кэшировние ответа на nginx (proxy cache)** <br />
 Запрос: <br />
 `ab -n 500 http://127.0.0.1/` <br />
 Ответ: <br />
@@ -234,14 +234,14 @@ Percentage of the requests served within a certain time (ms)
  100%   1077 (longest request)
 ```
 
-Насколько быстрее отдается статика по сравнению с WSGI? <br />
+**Насколько быстрее отдается статика по сравнению с WSGI?** <br />
 Ответ: <br />
 > Обратимся к параметру TPR (Time per request). <br />
 > Nginx TPR: 0.222 [ms] (mean) <br />
 > Gunicorn TPR: 6.217 [ms] (mean) <br />
 > Разница на 5.995 [ms] (mean), nginx отдает статику быстрее в 28 раз в среднем.
 
-Во сколько раз ускоряет работу proxy_cache? <br />
+**Во сколько раз ускоряет работу proxy_cache?** <br />
 Ответ: <br />
 > Сравним время отдачи динамического документа через nginx без кеширования и с кешированием. <br />
 > Без кеширования: 1162.728 [ms] (mean) <br />
