@@ -24,10 +24,10 @@ EER Diagram
 Профиль
 ![image](https://github.com/user-attachments/assets/79de809b-026d-4931-9aaa-af9de9dc4a11)
 
-Отдача статического документа напрямую через nginx
-Запрос: 
+Отдача статического документа напрямую через nginx <br /> 
+Запрос: <br />
 `ab -n 5000 http://127.0.0.1/static/css/styles.css`
-Ответ: 
+Ответ: <br />
 ```
 Server Software:        nginx/1.18.0
 Server Hostname:        127.0.0.1
@@ -66,10 +66,10 @@ Percentage of the requests served within a certain time (ms)
  100%      3 (longest request)
 ```
 
-Отдача статического документа напрямую через gunicorn
-Запрос: 
+Отдача статического документа напрямую через gunicorn <br />
+Запрос: <br />
 `ab -n 5000 http://127.0.0.1:8000/static/css/styles.css`
-Ответ:
+Ответ: <br />
 ```
 Server Software:        gunicorn
 Server Hostname:        127.0.0.1
@@ -108,10 +108,10 @@ Percentage of the requests served within a certain time (ms)
  100%    609 (longest request)
 ```
 
-Отдача динамического документа напрямую через gunicorn
-Запрос: 
+Отдача динамического документа напрямую через gunicorn <br />
+Запрос: <br />
 `ab -n 500 http://127.0.0.1:8000/`
-Ответ:
+Ответ: <br />
 ```
 Server Software:        gunicorn
 Server Hostname:        127.0.0.1
@@ -150,10 +150,10 @@ Percentage of the requests served within a certain time (ms)
  100%   1291 (longest request)
 ```
 
-Отдача динамического документа через проксирование запроса с nginx на gunicorn
-Запрос: 
+Отдача динамического документа через проксирование запроса с nginx на gunicorn <br />
+Запрос: <br />
 `ab -n 500 http://127.0.0.1/`
-Ответ:
+Ответ: <br />
 ```
 Server Software:        nginx/1.18.0
 Server Hostname:        127.0.0.1
@@ -192,10 +192,10 @@ Percentage of the requests served within a certain time (ms)
  100%   2124 (longest request)
 ```
 
-Отдача динамического документа через проксирование запроса с nginx на gunicorn, при кэшировние ответа на nginx (proxy cache)
-Запрос: 
+Отдача динамического документа через проксирование запроса с nginx на gunicorn, при кэшировние ответа на nginx (proxy cache) <br />
+Запрос: <br />
 `ab -n 500 http://127.0.0.1/`
-Ответ:
+Ответ: <br />
 ```
 Server Software:        nginx/1.18.0
 Server Hostname:        127.0.0.1
