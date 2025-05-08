@@ -26,7 +26,7 @@ EER Diagram
 
 Отдача статического документа напрямую через nginx
 Запрос: 
-ab -n 5000 http://127.0.0.1/static/css/styles.css
+`ab -n 5000 http://127.0.0.1/static/css/styles.css`
 Ответ: 
 Server Software:        nginx/1.18.0
 Server Hostname:        127.0.0.1
