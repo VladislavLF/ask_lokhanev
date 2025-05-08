@@ -28,7 +28,7 @@ EER Diagram
 Запрос: 
 `ab -n 5000 http://127.0.0.1/static/css/styles.css`
 Ответ: 
-Server Software:        nginx/1.18.0
+«`Server Software:        nginx/1.18.0
 Server Hostname:        127.0.0.1
 Server Port:            80
 
@@ -62,7 +62,7 @@ Percentage of the requests served within a certain time (ms)
   95%      0
   98%      1
   99%      1
- 100%      3 (longest request)
+ 100%      3 (longest request)«`
 
 Отдача статического документа напрямую через gunicorn
 Запрос: 
