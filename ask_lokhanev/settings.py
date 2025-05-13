@@ -84,7 +84,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'ask_lokhanev_db',
         'USER': 'root',
-        'PASSWORD': 'Inepam181312!'
+        'PASSWORD': 'admin'
     }
 }
 
