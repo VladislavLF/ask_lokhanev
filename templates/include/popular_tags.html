@@ -1,0 +1,23 @@
+{% load static %}
+
+{% load main_tags %}
+
+{% get_popular_tags as popular_tags %}
+
+<div class="article-side">
+<div class="article-side-block">
+<div class="container-fluid">
+    <h4><i class="fa fa-cogs lblue"></i>&nbsp; Популярные теги</h4>
+    <hr>
+    <div class="row">
+    {% for tag in popular_tags %}
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <div class="article-side-block-item">
+                <a href={% url 'tag' tag.pk %}><span>{{ tag.title }}</span></a>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+</div>
+</div>

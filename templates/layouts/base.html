@@ -1,0 +1,189 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href={% static 'css/styles.css' %}>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <title>{% block title %}{% endblock %}</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://unpkg.com/centrifuge@5.2.2/dist/centrifuge.js"></script>
+    <script>{% block scripts %}{% endblock %}</script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const searchForm = document.getElementById('search-form');
+    const searchInput = document.getElementById('search-input');
+    const searchResults = document.getElementById('search-results');
+    let timeoutId;
+    let lastQuery = '';
+
+    searchInput.addEventListener('input', function() {
+        const query = this.value.trim();
+        clearTimeout(timeoutId);
+
+        if (query === lastQuery) return;
+
+        if (query.length < 2) {
+            hideResults();
+            return;
+        }
+
+        searchResults.innerHTML = '<div class="dropdown-item">Поиск...</div>';
+        searchResults.style.display = 'block';
+
+        timeoutId = setTimeout(() => {
+            lastQuery = query;
+            fetch(`/api/search/?q=${encodeURIComponent(query)}`)
+                .then(response => response.json())
+                .then(data => {
+                    displayResults(data.results, query);
+                })
+                .catch(error => {
+                    console.error('Search error:', error);
+                    searchResults.innerHTML = '<div class="dropdown-item text-danger">Ошибка поиска</div>';
+                });
+        }, 300);
+    });
+
+    searchForm.addEventListener('submit', function(e) {
+        const query = searchInput.value.trim();
+
+        if (query.length < 2) {
+            e.preventDefault();
+            searchInput.focus();
+            return;
+        }
+
+        const activeItem = searchResults.querySelector('.dropdown-item.active');
+        if (activeItem) {
+            e.preventDefault();
+            window.location.href = activeItem.getAttribute('href');
+            return;
+        }
+    });
+
+    searchInput.addEventListener('click', function() {
+        if (this.value.trim().length >= 2 && lastQuery === this.value.trim()) {
+            searchForm.submit();
+        }
+    });
+
+    function displayResults(results, query) {
+        if (results.length > 0) {
+            searchResults.innerHTML = results.map(result => `
+                <a class="dropdown-item d-block py-2" href="${result.url}">
+                    <div class="fw-bold mb-1">${highlightMatch(result.title, query)}</div>
+                    <div class="text-muted small">${highlightMatch(result.text, query)}</div>
+                </a>
+            `).join('');
+
+            searchResults.innerHTML += `
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-center fw-bold py-2"
+                   href="/search/?q=${encodeURIComponent(query)}">
+                    Все результаты
+                </a>
+            `;
+        } else {
+            searchResults.innerHTML = `
+                <div class="dropdown-item">
+                    Ничего не найдено.
+                    <a href="/search/?q=${encodeURIComponent(query)}">Искать точную фразу</a>
+                </div>
+            `;
+        }
+        searchResults.style.display = 'block';
+    }
+
+    function highlightMatch(text, query) {
+        if (!text || !query) return text;
+        return text.replace(new RegExp(query, 'gi'), match => `<mark>${match}</mark>`);
+    }
+
+    function hideResults() {
+        searchResults.style.display = 'none';
+        searchResults.innerHTML = '';
+    }
+
+    document.addEventListener('click', function(e) {
+        if (!searchForm.contains(e.target)) {
+            hideResults();
+        }
+    });
+});
+    </script>
+</head>
+<body>
+<header class="p-3 bg-dark text-white">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a href={% url "index" %} class="header-logo d-flex align-items-center mb-2 mb-lg-0 text-decoration-none">
+          AskLokhanev
+        </a>
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+            {% for item_url, item_title in menu.items %}
+                <li><a href={% url item_url %} class="nav-link px-2">{{ item_title }}</a></li>
+            {% endfor %}
+        </ul>
+        <form class="header-form col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3"
+              id="search-form"
+              action="{% url 'search_page' %}"
+              method="get">
+            <div class="position-relative">
+                <input type="search"
+                       class="form-control form-control-dark"
+                       placeholder="Поиск"
+                       aria-label="Search"
+                       id="search-input"
+                       name="q"
+                       required
+                       minlength="2">
+                <div class="dropdown-menu w-100 position-absolute" id="search-results" style="display: none;"></div>
+            </div>
+            <button type="submit" hidden></button>
+        </form>
+        <div class="header-auth text-end">
+            {% if user.is_authenticated %}
+         <div class="header-auth-log-in">
+             <div class="flex-shrink-0 dropdown">
+          <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+            <img src={{ user.profile.avatar.url }} alt="Аватар" width="32" height="32" class="rounded-circle">
+          </a>
+          <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">
+            <li><a class="dropdown-item" href={% url "settings" %}>Профиль</a></li>
+            <li>
+            <form method="post" action="{% url 'logout' %}?next={{ request.path }}">
+                 {% csrf_token %}
+                 <button type="submit" class="dropdown-item">Выйти</button>
+            </form>
+              </li>
+          </ul>
+        </div>
+         </div>
+            {% else %}
+         <div class="header-auth-log-out">
+          <a class="btn btn-outline-light me-2" href={% url "login" %}>Войти</a>
+          <a class="btn" href={% url "signup" %}>Регистрация</a>
+         </div>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+</header>
+<article>
+<div class="article-content">
+    <div class="article-content-heading">
+    <h1>{% block heading %}{% endblock %}</h1>
+    </div>
+    {% block content %}
+    {% endblock %}
+</div>
+<div class="article-side">
+{% include 'include/popular_tags.html' %}
+{% include 'include/top_users.html' %}
+</div>
+</article>
+</body>
+</html>

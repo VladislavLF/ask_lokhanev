@@ -1,0 +1,23 @@
+{% load static %}
+
+{% load main_tags %}
+
+{% get_top_users as top_users %}
+
+<div class="article-side">
+<div class="article-side-block">
+<div class="container-fluid">
+    <h4><i class="fa fa-cogs lblue"></i>&nbsp; Топ пользователей</h4>
+    <hr>
+    <div class="row">
+    {% for user in top_users %}
+        <div class="col-md-3 col-sm-3 col-xs-6">
+            <div class="article-side-block-item">
+                <span>{{ user }}</span>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+</div>
+</div>

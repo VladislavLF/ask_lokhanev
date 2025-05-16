@@ -1,0 +1,14 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block heading %}
+404 - Страница не найдена
+{% endblock %}
+
+{% block content %}
+<p>Извините, запрашиваемая страница не существует.</p>
+<a href="{% url 'index' %}">Вернуться на главную</a>
+{% endblock %}

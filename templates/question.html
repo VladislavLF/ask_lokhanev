@@ -1,0 +1,312 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+
+{% block title %}
+{{ title }} №{{ question.id }}
+{% endblock %}
+{% block scripts %}
+function rateObject(objectId, action, type) {
+    $.ajax({
+        url: '/api/rate/',
+        type: 'POST',
+        data: {
+            'id': objectId,
+            'action': action,
+            'type': type,
+            'csrfmiddlewaretoken': getCookie('csrftoken')
+        },
+        success: function(response) {
+            if (response.error) {
+                alert(response.error);
+            } else {
+                const prefix = type === 'question' ? 'question' : 'answer';
+                const containerId = type === 'question' ? '#question-' + objectId : '#comment-' + objectId;
+
+                $('#' + prefix + '-like-' + objectId).val(response.count_likes);
+                $('#' + prefix + '-dislike-' + objectId).val(response.count_dislikes);
+
+                const plus = $(containerId + ' .plus');
+                const minus = $(containerId + ' .minus');
+
+                if (action === 'like') {
+                    if (plus.hasClass('plus-active')) {
+                        plus.removeClass('plus-active');
+                    } else {
+                        plus.addClass('plus-active');
+                        minus.removeClass('minus-active');
+                    }
+                } else {
+                    if (minus.hasClass('minus-active')) {
+                        minus.removeClass('minus-active');
+                    } else {
+                        minus.addClass('minus-active');
+                        plus.removeClass('plus-active');
+                    }
+                }
+            }
+        },
+        error: function(xhr, status, error) {
+            alert('Произошла ошибка: ' + error);
+        }
+    });
+}
+
+function toggleCorrectAnswer(questionId, answerId, mark) {
+    $.ajax({
+        url: '/api/answer/correct/',
+        type: 'POST',
+        data: {
+            'question_id': questionId,
+            'answer_id': answerId,
+            'mark': mark,
+            'csrfmiddlewaretoken': getCookie('csrftoken')
+        },
+        success: function(response) {
+            if (response.error) {
+                alert(response.error);
+            } else {
+                const answerElem = $('#answer-' + answerId);
+                const buttonElem = $('#toggle-button-' + answerId);
+                const statusElem = $('#correct-status-' + answerId);
+
+                if (response.is_correct) {
+                    answerElem.addClass('correct-answer');
+                    statusElem.text('Правильный ответ');
+                    buttonElem.text('Убрать пометку');
+                    buttonElem.attr('onclick', `toggleCorrectAnswer(${questionId}, ${answerId}, false)`);
+                } else {
+                    answerElem.removeClass('correct-answer');
+                    statusElem.text('');
+                    buttonElem.text('Отметить правильным');
+                    buttonElem.attr('onclick', `toggleCorrectAnswer(${questionId}, ${answerId}, true)`);
+                }
+            }
+        },
+        error: function(xhr, status, error) {
+            alert('Произошла ошибка: ' + error);
+        }
+    });
+}
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+{% endblock %}
+
+{% block content %}
+ 			<div class="ui-outer" id="question-{{ question.id }}">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-2 col-sm-2 col-xs-2 col-pad">
+							<div class="ui-block">
+                            <div>
+                            <img class="ui-logo" src={{ question.user.profile.avatar.url }} alt="user-image">
+                            </div>
+							<div class="article-content-block-user-name">{{ question.user.profile.name }}</div>
+							</div>
+						</div>
+						<div class="col-md-10 col-sm-7 col-xs-7 col-pad">
+							<div class="ui-content">
+								<h4>{{ question.title }}</h4>
+								<p>{{ question.text }}</p><br>
+                               <div class="ui-content-block">
+                                <div class="qty">
+                                    <button
+                                        {% if user.is_authenticated %} onclick="rateObject({{ question.id }}, 'like', 'question')" {% endif %}
+                                        class="plus {% if question.id in likes_question %}plus-active{% endif %}"
+                                    >&#128402;</button>
+
+                                    <input id="question-like-{{ question.id }}" disabled type="number" class="count" value="{{ question.count_likes }}">
+
+                                    <button
+                                        {% if user.is_authenticated %} onclick="rateObject({{ question.id }}, 'dislike', 'question')" {% endif %}
+                                        class="minus {% if question.id in dislikes_question %}minus-active{% endif %}"
+                                    >&#128403;</button>
+
+                                    <input id="question-dislike-{{ question.id }}" disabled type="number" class="count" value="{{ question.count_dislikes }}">
+                                </div>
+                                <div>
+                                <span class="ui-content-block-comments"><b>Комментарии: {{ question.count_comments }}</b> </span>
+                                </div>
+                                </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+						<div class="col-md-3 col-sm-3 col-xs-3 col-pad">
+				                <div class="article-content-block-tags"><h5>Теги вопроса</h5>
+				                <hr>
+								<ul>
+								    {% for tag in question.tags.all %}
+								    <li><a href={% url 'tag' tag.pk %}>{{ tag.title }}</a></li>
+									{% endfor %}
+								</ul>
+								</div>
+						</div>
+<div id="answers" channel="{{ question.id }}">
+<div class="article-content-heading">
+<h1>Комментарии ({{ question.count_comments }})</h1>
+</div>
+{% for comment in comments %}
+    			<div class="ui-outer" id="comment-{{ comment.id }}">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-2 col-sm-2 col-xs-2 col-pad">
+							<div class="ui-block">
+                            <div>
+                            <img class="ui-logo" src={{ comment.user.profile.avatar.url }} alt="user-image">
+                            </div>
+							<div class="article-content-block-user-name">{{ comment.user.profile.name }}</div>
+							</div>
+						</div>
+						<div class="col-md-7 col-sm-7 col-xs-7 col-pad">
+							<div class="ui-content">
+								<p>{{ comment.text }}</p><br>
+                               <div class="ui-content-block">
+                                <div class="qty">
+                                    <button
+                                        {% if user.is_authenticated %} onclick="rateObject({{ comment.id }}, 'like', 'answer')" {% endif %}
+                                        class="plus {% if comment.id in likes_answer %}plus-active{% endif %}"
+                                    >&#128402;</button>
+
+                                    <input id="answer-like-{{ comment.id }}" disabled type="number" class="count" value="{{ comment.count_likes }}">
+
+                                    <button
+                                        {% if user.is_authenticated %} onclick="rateObject({{ comment.id }}, 'dislike', 'answer')" {% endif %}
+                                        class="minus {% if comment.id in dislikes_answer %}minus-active{% endif %}"
+                                    >&#128403;</button>
+
+                                    <input id="answer-dislike-{{ comment.id }}" disabled type="number" class="count" value="{{ comment.count_dislikes }}">
+                                </div>
+                                <span id="correct-status-{{ comment.id }}" class="right-answer">
+                                    {% if comment.is_correct %}Правильный ответ{% endif %}
+                                </span>
+                                {% if question.user.id == user.id %}
+                                <button id="toggle-button-{{ comment.id }}"
+                                        onclick="toggleCorrectAnswer({{ question.id }}, {{ comment.id }},
+                                        {% if comment.is_correct %}false{% else %}true{% endif %})"
+                                        class="correct-mark">
+                                    {% if comment.is_correct %}
+                                        Убрать пометку
+                                    {% else %}
+                                        Отметить правильным
+                                    {% endif %}
+                                </button>
+                                {% endif %}
+                                </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+{% endfor %}
+</div>
+{% if user.is_authenticated %}
+<form method="post" class="form col-10 login-block">
+    {% csrf_token %}
+    <div class="error-message">{{ form.non_field_errors }}</div>
+    {% for f in form %}
+        <div class="form-group">
+            <label class="form-label control-label mb-2" for="{{ f.id_for_label }}">{{ f.label }}:</label>
+            {{ f }}
+            <div class="error-message">{{ f.errors }}</div>
+        </div>
+    {% endfor %}
+    <div class="form-group">
+        <button type="submit" class="ask-answer-btn">Отправить</button>
+    </div>
+</form>
+{% else %}
+<p><a href={% url "login" %}>Авторизуйтесь</a> на сайте, чтобы оставить комментарий</p>
+{% endif %}
+<script>
+const centrifuge = new Centrifuge("{{ centrifugo.ws_url }}", {
+token: "{{ centrifugo.user_token }}"
+});
+
+const rootElement = document.getElementById("answers");
+const channel = rootElement.getAttribute("channel");
+
+const sub = centrifuge.newSubscription(channel);
+
+sub.on('publication', function (ctx) {
+    const data = ctx.data.answer;
+
+    // Простой шаблон нового комментария
+    const newCommentHtml = `
+    <div class="ui-outer" id="comment-${data.id}">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-md-2 col-sm-2 col-xs-2 col-pad">
+							<div class="ui-block">
+                            <div>
+                            <img class="ui-logo" src=${data.avatar} alt="user-image">
+                            </div>
+							<div class="article-content-block-user-name">${data.user}</div>
+							</div>
+						</div>
+						<div class="col-md-7 col-sm-7 col-xs-7 col-pad">
+							<div class="ui-content">
+								<p>${data.text}</p><br>
+                               <div class="ui-content-block">
+                                <div class="qty">
+                                    <button
+                                        {% if user.is_authenticated %} onclick="rateObject(${data.id}, 'like', 'answer')" {% endif %}
+                                        class="plus {% if data.id in likes_answer %}plus-active{% endif %}"
+                                    >&#128402;</button>
+
+                                    <input id="answer-like-${data.id}" disabled type="number" class="count" value="${data.count_likes}">
+
+                                    <button
+                                        {% if user.is_authenticated %} onclick="rateObject(${data.id}, 'dislike', 'answer')" {% endif %}
+                                        class="minus {% if data.id in dislikes_answer %}minus-active{% endif %}"
+                                    >&#128403;</button>
+
+                                    <input id="answer-dislike-${data.id}" disabled type="number" class="count" value="${data.count_dislikes}">
+                                </div>
+                                <span id="correct-status-${data.id}" class="right-answer">
+                                    {% if data.is_correct %}Правильный ответ{% endif %}
+                                </span>
+                                {% if question.user.id == user.id %}
+                                <button id="toggle-button-${data.id}"
+                                        onclick="toggleCorrectAnswer({{ question.id }}, ${data.id},
+                                        {% if data.is_correct %}false{% else %}true{% endif %})"
+                                        class="correct-mark">
+                                    {% if data.is_correct %}
+                                        Убрать пометку
+                                    {% else %}
+                                        Отметить правильным
+                                    {% endif %}
+                                </button>
+                                {% endif %}
+                                </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+    `;
+
+    // Добавляем комментарий в конец блока с ответами
+    rootElement.insertAdjacentHTML('beforeend', newCommentHtml);
+});
+
+sub.subscribe();
+centrifuge.connect();
+
+
+</script>
+{% endblock %}

@@ -1,0 +1,115 @@
+{% extends "layouts/base.html" %}
+{% block title %}
+{{ title }}
+{% endblock %}
+{% block scripts %}
+function rateObject(objectId, action, type) {
+    $.ajax({
+        url: '/api/rate/',
+        type: 'POST',
+        data: {
+            'id': objectId,
+            'action': action,
+            'type': type,
+            'csrfmiddlewaretoken': getCookie('csrftoken')
+        },
+        success: function(response) {
+            if (response.error) {
+                alert(response.error);
+            } else {
+                const prefix = type === 'question' ? 'question' : 'answer';
+                const containerId = type === 'question' ? '#question-' + objectId : '#comment-' + objectId;
+
+                $('#' + prefix + '-like-' + objectId).val(response.count_likes);
+                $('#' + prefix + '-dislike-' + objectId).val(response.count_dislikes);
+
+                const plus = $(containerId + ' .plus');
+                const minus = $(containerId + ' .minus');
+
+                if (action === 'like') {
+                    if (plus.hasClass('plus-active')) {
+                        plus.removeClass('plus-active');
+                    } else {
+                        plus.addClass('plus-active');
+                        minus.removeClass('minus-active');
+                    }
+                } else {
+                    if (minus.hasClass('minus-active')) {
+                        minus.removeClass('minus-active');
+                    } else {
+                        minus.addClass('minus-active');
+                        plus.removeClass('plus-active');
+                    }
+                }
+            }
+        },
+        error: function(xhr, status, error) {
+            alert('Произошла ошибка: ' + error);
+        }
+    });
+}
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+{% endblock %}
+{% block heading %}
+{{ title }}
+{% endblock %}
+{% block content %}
+{% for question in page_obj %}
+    {% include "layouts/question.html" %}
+{% endfor %}
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.previous_page_number }}&q={{ query }}" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+    {% endif %}
+
+    {% if page_obj.number > 3 %}
+      <li class="page-item"><a class="page-link" href="?page=1&q={{ query }}">1</a></li>
+      {% if page_obj.number > 4 %}
+        <li class="page-item disabled"><span class="page-link">...</span></li>
+      {% endif %}
+    {% endif %}
+
+    {% for p in page_obj.paginator.page_range %}
+      {% if p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
+        <li class="page-item {% if page_obj.number == p %}active{% endif %}">
+          <a class="page-link" href="?page={{ p }}&q={{ query }}">{{ p }}</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.number < page_obj.paginator.num_pages|add:-2 %}
+      {% if page_obj.number < page_obj.paginator.num_pages|add:-3 %}
+        <li class="page-item disabled"><span class="page-link">...</span></li>
+      {% endif %}
+      <li class="page-item"><a class="page-link" href="?page={{ page_obj.paginator.num_pages }}&q={{ query }}">{{ page_obj.paginator.num_pages }}</a></li>
+    {% endif %}
+
+    {% if page_obj.has_next %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ page_obj.next_page_number }}&q={{ query }}" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    {% endif %}
+  </ul>
+</nav>
+{% endblock %}

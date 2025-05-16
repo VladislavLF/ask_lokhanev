@@ -1,0 +1,125 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block heading %}
+Задать вопрос
+{% endblock %}
+
+{% block scripts %}
+    document.addEventListener('DOMContentLoaded', function () {
+        const tagInput = document.getElementById('tag-input');
+        const addTagBtn = document.getElementById('add-tag-btn');
+        const tagList = document.getElementById('tag-list');
+        const hiddenTagField = document.getElementById('hidden-tag-field');
+        const tags = new Set();
+
+        function updateTagField() {
+            hiddenTagField.value = Array.from(tags).join(',');
+        }
+
+        function createTagElement(tag) {
+            const span = document.createElement('span');
+            span.className = 'badge bg-primary me-1 mb-1';
+            span.style.cursor = 'pointer';
+            span.innerText = tag + ' ×';
+
+            span.onclick = () => {
+                tags.delete(tag);
+                tagList.removeChild(span);
+                updateTagField();
+                tagInput.disabled = false;
+                addTagBtn.disabled = false;
+            };
+
+            return span;
+        }
+
+        function addTag() {
+            const tag = tagInput.value.trim();
+            if (!tag || tags.has(tag)) return;
+
+            if (tags.size >= 3) {
+                alert("Максимум 3 тега.");
+                return;
+            }
+
+            tags.add(tag);
+            const tagEl = createTagElement(tag);
+            tagList.appendChild(tagEl);
+            updateTagField();
+            tagInput.value = '';
+
+            if (tags.size >= 3) {
+                tagInput.disabled = true;
+                addTagBtn.disabled = true;
+            }
+        }
+
+        addTagBtn.onclick = addTag;
+
+        tagInput.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                addTag();
+            }
+        });
+    });
+{% endblock %}
+
+{% block content %}
+<form method="post" class="mt-4">
+   <div class="container-fluid">
+	<div class="row">
+		        <div class="card-body">
+		            <div class="row">
+		                <div class="col-md-8">
+                                {% csrf_token %}
+                                {{ form.non_field_errors }}
+                              <div class="form-group row ask-answer-heading">
+                                <label for="{{ form.title.id_for_label }}" class="col-12 col-form-label">Заголовок вопроса</label>
+                                <div class="col-12">
+                                {{ form.title }}
+                                {{ form.title.errors }}
+                                </div>
+                              </div>
+                              <div class="form-group row ask-answer-text">
+                                <label for="{{ form.text.id_for_label }}" class="col-12 col-form-label">Текст вопроса</label>
+                                <div class="col-12">
+                                {{ form.text }}
+                                {{ form.text.errors }}
+                                </div>
+                              </div>
+        		        </div>
+<div class="col-md-4">
+    <div class="card mb-3 ask-answer-tags" style="max-width: 18rem;">
+        <div class="card-header">Теги</div>
+        <div class="card-body">
+            <div class="form-group row">
+                <div class="col-9">
+                    <input id="tag-input" placeholder="Введите тег" class="form-control here" type="text">
+                </div>
+                <div class="col-2">
+                    <button type="button" class="btn" id="add-tag-btn">+</button>
+                </div>
+            </div>
+            <div class="mt-2" id="tag-list"></div>
+            <input type="hidden" name="tags" id="hidden-tag-field">
+        </div>
+    </div>
+</div>
+<div class="col-md-2">
+<button type="submit" class="ask-answer-btn" >Отправить</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</form>
+{% endblock %}
+
+
+
