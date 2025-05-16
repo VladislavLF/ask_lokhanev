@@ -1,7 +1,17 @@
 Проект «Вопросы и Ответы» (Технопарк МГТУ. Программа по веб-разработке (1 семестр). Дисциплина: Web-технологии). <br />
- Автор: Лоханев В.Ф. (WEB-12). <br />
- Верстка сайта находится в директории Layout. <br />
- Заполнение базы данных MySQL осуществляется по management command: python manage.py fill_db [ratio]. Предварительно необходимо настроить DATABASES в settings.py под свою базу данных.  <br />
+Автор: Лоханев В.Ф. (WEB-12). <br />
+**Используемые технологии** <br />
+- Код приложения – Python + Django. <br />
+- Приложение запускается под управлением сервера Gunicorn. <br />
+- База данных – MySQL/PostgreSQL. <br />
+- Для отдачи статики используется nginx. <br />
+- Для доставки real-time сообщений Centrifugo. <br />
+- Для кеширования данных – memcached. <br />
+- Верстка выполняется с использованием Twitter Bootstrap. <br />
+- Взаимодействие интерфейса с пользователем обеспечивается JavaScript/jQuery. <br />
+- Для авторизации и хранения пользователей используется приложение django.contrib.auth. <br />
+Верстка сайта находится в директории Layout. <br />
+Заполнение базы данных MySQL осуществляется по management command: python manage.py fill_db [ratio]. Предварительно необходимо настроить DATABASES в settings.py под свою базу данных.  <br />
 
 **EER Diagram**
 ![image](https://github.com/user-attachments/assets/0a79bf83-4cb7-4241-ac31-d0bbb29bd874)
