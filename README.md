@@ -12,7 +12,7 @@
 - Для авторизации и хранения пользователей используется приложение django.contrib.auth. <br />
 <hr />
 Верстка сайта находится в директории Layout. <br />
-Заполнение базы данных MySQL осуществляется по management command: python manage.py fill_db [ratio]. Предварительно необходимо настроить DATABASES в settings.py под свою базу данных.  <br />
+Заполнение базы данных MySQL осуществляется по management command: python manage.py fill_db [ratio]. Предварительно необходимо настроить DATABASES в settings.py под свою базу данных.  <br /><hr />
 
 **EER Diagram**
 ![image](https://github.com/user-attachments/assets/0a79bf83-4cb7-4241-ac31-d0bbb29bd874)
